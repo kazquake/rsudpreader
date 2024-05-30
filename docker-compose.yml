@@ -1,3 +1,7 @@
+networks:
+  rsudp_network:
+    driver: bridge
+
 services:
   rsudp1:
     image: rishatsultanov/rsudp:v1.0.0
@@ -6,7 +10,9 @@ services:
       - ./configs/rsudp1_settings.json:/root/.config/rsudp/rsudp_settings.json
     ports:
       - "8881:8888/udp"
-  
+    networks:
+      - rsudp_network
+
   rsudp2:
     image: rishatsultanov/rsudp:v1.0.0
     container_name: rsudp2
@@ -14,7 +20,9 @@ services:
       - ./configs/rsudp2_settings.json:/root/.config/rsudp/rsudp_settings.json
     ports:
       - "8882:8888/udp"
-  
+    networks:
+      - rsudp_network
+
   rsudp3:
     image: rishatsultanov/rsudp:v1.0.0
     container_name: rsudp3
@@ -22,4 +30,56 @@ services:
       - ./configs/rsudp3_settings.json:/root/.config/rsudp/rsudp_settings.json
     ports:
       - "8883:8888/udp"
+    networks:
+      - rsudp_network
 
+  rsudp1-presenter:
+    container_name: rsudp1-presenter
+    image: rishatsultanov/presenter:v1.0.0
+    environment:
+      TZ: Asia/Almaty
+      UDP_PORT: 5001
+      UDP_IP: 0.0.0.0
+      WEB_PORT: 8080
+      STATION: "R1B7B"
+      RS_LINK_EMBED: "https://dataview.raspberryshake.org/#/embed/AM/R1B7B/00/EHZ"
+    restart: unless-stopped
+    command: presenter
+    networks:
+      - rsudp_network
+    ports:
+      - "8081:8080"
+
+  rsudp2-presenter:
+    container_name: rsudp2-presenter
+    image: rishatsultanov/presenter:v1.0.0
+    environment:
+      TZ: Asia/Almaty
+      UDP_PORT: 5002
+      UDP_IP: 0.0.0.0
+      WEB_PORT: 8080
+      STATION: "R1B7B"
+      RS_LINK_EMBED: "https://dataview.raspberryshake.org/#/embed/AM/R1B7B/00/EHZ"
+    restart: unless-stopped
+    command: presenter
+    networks:
+      - rsudp_network
+    ports:
+      - "8082:8080"
+
+  rsudp3-presenter:
+    container_name: rsudp3-presenter
+    image: rishatsultanov/presenter:v1.0.0
+    environment:
+      TZ: Asia/Almaty
+      UDP_PORT: 5003
+      UDP_IP: 0.0.0.0
+      WEB_PORT: 8080
+      STATION: "R1B7B"
+      RS_LINK_EMBED: "https://dataview.raspberryshake.org/#/embed/AM/R1B7B/00/EHZ"
+    restart: unless-stopped
+    command: presenter
+    networks:
+      - rsudp_network
+    ports:
+      - "8083:8080"
