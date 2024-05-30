@@ -1,6 +1,9 @@
 # RSUDPReader
 
-RSUDPReader is a repository designed to run RSUDP readers in Docker containers for multiple stations. It outputs STA/LTA (Short-Term Average over Long-Term Average) sensor readings from port 5000 UDP to other ports. The main goal of this repository is to run STA/LTA algorithms from all stations on a single server and then transmit the data via UDP to other services, such as [Presenter](https://github.com/kazquake/presenter).
+RSUDPReader is a repository designed to run RSUDP readers in Docker containers for multiple stations. It outputs STA/LTA (Short-Term Average over Long-Term Average) sensor readings from port 888(1-8) UDP to other ports. The main goal of this repository is to run STA/LTA algorithms from all stations on a single server and then transmit the data via UDP to other services, such as [Presenter](https://github.com/kazquake/presenter).
+
+![](docs/example_start.gif)
+
 
 ## Getting Started
 
@@ -50,7 +53,6 @@ To add a new station:
       volumes:
         - ./configs/rsudp4_settings.json:/root/.config/rsudp/rsudp_settings.json
       ports:
-        - "5004:5000/udp"
         - "8884:8888/udp"
     ```
 
