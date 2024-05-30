@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# Do not ignore this directory
+!/
+
+# Do not ignore specific files
+!rsudp1_settings.json
+!rsudp2_settings.json
+!rsudp3_settings.json
+!.gitignore
