@@ -61,3 +61,4 @@ To add a new station:
 To start the RSUDP readers, run:
 ```sh
 docker-compose up -d
+```
