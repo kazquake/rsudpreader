@@ -1,0 +1,28 @@
+services:
+  rsudp1:
+    image: rishatsultanov/rsudp:v1.0.0
+    container_name: rsudp1
+    volumes:
+      - ./configs/rsudp1_settings.json:/root/.config/rsudp/rsudp_settings.json
+    ports:
+      - "5001:5000/udp"
+      - "8881:8888/udp"
+  
+  rsudp2:
+    image: rishatsultanov/rsudp:v1.0.0
+    container_name: rsudp2
+    volumes:
+      - ./configs/rsudp2_settings.json:/root/.config/rsudp/rsudp_settings.json
+    ports:
+      - "5002:5000/udp"
+      - "8882:8888/udp"
+  
+  rsudp3:
+    image: rishatsultanov/rsudp:v1.0.0
+    container_name: rsudp3
+    volumes:
+      - ./configs/rsudp3_settings.json:/root/.config/rsudp/rsudp_settings.json
+    ports:
+      - "5003:5000/udp"
+      - "8883:8888/udp"
+
